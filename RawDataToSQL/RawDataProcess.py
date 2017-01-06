@@ -2,17 +2,30 @@ import MySQLdb
 import os
 import time
 
-def split_prefix(str_object):
-        words = testLine.split('/')
+dictPrefix = dict()
+dictInstance = dict()
+dictPredicate = dict()
+intInstanceCount = 0
+intPredicateCount = 0
 
-        intWordsLen = words.__len__()
-        strInstance = words[intWordsLen - 1]
-
-        strPrefix = ''
-        for intIndex in range(0, intWordsLen - 1):
-            strPrefix += words[intIndex]
-        if strPrefix in dictPrefix:
-
+global intPrefixCount
+intPrefixCount = 0
+def split_prefix(str_rdf):  # enum the prefix
+    global intPrefixCount
+    # print intPrefixCount
+    words = str_rdf.split('/')
+    intWordsLen = words.__len__()
+    strInstance = words[intWordsLen - 1]
+    strPrefix = ''
+    for intIndex in range(0, intWordsLen - 1):
+        strPrefix += words[intIndex] + '/'
+    if strPrefix in dictPrefix:
+        strRes = dictPrefix[strPrefix]
+    else:
+        strRes = 'p' + str(intPrefixCount) + '/'
+        dictPrefix[strPrefix] = strRes
+        intPrefixCount += 1
+    return strRes + strInstance
 
 
 fileS_OP = open('S_OP','w')
@@ -27,8 +40,6 @@ fileNames = os.listdir(pathDBpedia)
 
 print time.time()
 
-dictPrefix = dict()
-intPrefixCount = 0
 
 for eachFileName in fileNames:
     fileData = open(pathDBpedia + '/' + eachFileName)
@@ -53,11 +64,41 @@ for eachFileName in fileNames:
         listSPO = eachData.split(' ')
         if listSPO.__len__() < 3:
             continue
-        testLine = linesData[0]
 
         strSubject = listSPO[0]
+        if strSubject in dictInstance:
+            intSubjectId = dictInstance[strSubject]
+        else:
+            dictInstance[strSubject] = intInstanceCount
+            intSubjectId = intInstanceCount
+            intInstanceCount += 1
+
         strPredicate = listSPO[1]
+        if strPredicate in dictPredicate:
+            intPredicate = dictPredicate[strPredicate]
+        else:
+            dictPredicate[strPredicate] = intPredicateCount
+            intPredicateId = intPredicateCount
+            intPredicateCount += 1
+
         strObject = listSPO[2]
+        if strObject in dictInstance:
+            intObjectId = dictInstance[strObject]
+        else:
+            dictInstance[strObject] = intInstanceCount
+            intObjectId = intInstanceCount
+            intInstanceCount += 1
+
+        strSubjectId = str(intSubjectId)
+        strPredicateId = str(intPredicateId)
+        strObjectId = str(intObjectId)
+        strOPId = strObjectId + '|' + strPredicateId
+        strSOId = strSubjectId + '|' + strObjectId
+        strSPId = strSubjectId + '|' + strPredicateId
+        fileS_OP.write(strSubjectId + '\t' + strOPId + '\n')
+        fileP_SO.write(strPredicateId + '\t' + strSOId + '\n')
+        fileO_SP.write(strObjectId + '\t' + strSPId + '\n')
+        '''
         intListSPOLen = listSPO.__len__() - 1
         # print listSPO[intListSPOLen]
         for i in range(3, intListSPOLen):
@@ -70,14 +111,22 @@ for eachFileName in fileNames:
         hashSO = hashSubject.__str__() + 's' + hashObject.__str__()
         hashSP = hashSubject.__str__() + 's' + hashPredicate.__str__()
         '''
+
+
+        '''
         print hashSubject
         print hashObject
         print hashPredicate
         print hashOP
         '''
+
+        '''
         fileS_OP.write(hashSubject.__str__() + '\t' + hashOP + '\n')
         fileP_SO.write(hashPredicate.__str__() + '\t' + hashSO + '\n')
         fileO_SP.write(hashObject.__str__() + '\t' + hashSP + '\n')
+        '''
+
+
 #        fileSP_O.write(hashSP + '\t' + hashObject)
 #        fileSO_P.write(hashSO + '\t' + hashPredicate)
 #        fileOP_S.write(hashOP + '\t' + hashSubject)
@@ -102,4 +151,15 @@ fileOP_S.close()
 
 # cur.close()
 # connect.close()
+
+
+fileInstanceId = open('InstanceId', 'w')
+filePredicateId = open('PredicateId', 'w')
+for eachInstance in dictInstance:
+    fileInstanceId.write(eachInstance + '\t' + str(dictInstance[eachInstance]) + '\n')
+for eachPredicate in dictPredicate:
+    filePredicateId.write(eachPredicate + '\t' + str(dictPredicate[eachPredicate]) + '\n')
+
+fileInstanceId.close()
+filePredicateId.close()
 
