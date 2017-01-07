@@ -2,9 +2,10 @@ pydblite
 =================================
 insert file InstanceId, size = 2.5GB
 insert time: 1214.73577881
-create index time:1672.35540986
+create index time: 1672.35540986
 
 MySql
 =================================
 insert file InstanceId, size = 2.5GB
 insert time: 6 min 25.69 sec
+create index time: 8 min 1.39 sec
