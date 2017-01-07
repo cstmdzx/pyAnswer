@@ -27,13 +27,13 @@ def split_prefix(str_rdf):  # enum the prefix
         intPrefixCount += 1
     return strRes + strInstance
 
-
-fileS_OP = open('S_OP','w')
-fileOP_S = open('OP_S','w')
-fileSO_P = open('SO_P','w')
-fileP_SO = open('P_SO','w')
-fileSP_O = open('SP_O','w')
-fileO_SP = open('O_SP','w')
+strPath = './res/'
+fileS_OP = open(strPath + 'S_OP','w')
+fileOP_S = open(strPath + 'OP_S','w')
+fileSO_P = open(strPath + 'SO_P','w')
+fileP_SO = open(strPath + 'P_SO','w')
+fileSP_O = open(strPath + 'SP_O','w')
+fileO_SP = open(strPath + 'O_SP','w')
 
 pathDBpedia = '/home/nklyp/pyAnswer/dbpediattl'
 fileNames = os.listdir(pathDBpedia)
