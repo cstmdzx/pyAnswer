@@ -6,3 +6,5 @@ create index time:1672.35540986
 
 MySql
 =================================
+insert file InstanceId, size = 2.5GB
+insert time: 6 min 25.69 sec
