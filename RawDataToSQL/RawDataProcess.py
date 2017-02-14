@@ -11,6 +11,7 @@ intPredicateCount = 0
 global intPrefixCount
 intPrefixCount = 0
 def split_prefix(str_rdf):  # enum the prefix
+    # failed
     global intPrefixCount
     # print intPrefixCount
     words = str_rdf.split('/')
