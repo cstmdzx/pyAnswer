@@ -1,0 +1,7 @@
+python dict
+=====================
+用来插入instanceid，时间较长，估计准备用mysql来进行处理
+dict instance time:
+181.49
+dict predicate time:
+185.19
