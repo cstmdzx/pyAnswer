@@ -56,8 +56,7 @@
     create index indexObjPred on S_OP(ObjPred);
     --创建ObjPred的索引
         
-+ desc 
-
++ desc S_OP:
  Field   | Type         | Null | Key | Default | Extra 
 ---------|--------------|------|-----|---------|-------
  Sub     | int(11)      | NO   | MUL | NULL    |       
@@ -79,7 +78,7 @@
     create index indexSubPred on O_SP(SubPred);
     --创建SubPred的索引
         
-+ desc 
++ desc O_SP:
 
  Field   | Type         | Null | Key | Default | Extra 
 ---------|--------------|------|-----|---------|-------
@@ -102,7 +101,7 @@
     create index indexSubObj on P_SO(SubObj);
     --创建SubObj的索引
         
-+ desc 
++ desc P_SO:
 
  Field  | Type         | Null | Key | Default | Extra 
 --------|--------------|------|-----|---------|-------
