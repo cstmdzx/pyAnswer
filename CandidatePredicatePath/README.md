@@ -1,2 +1,2 @@
 # 选出每一个RelationPhrase的候选Predicate/Path
-- **Label.py 用来把所有谓语为<label>的subject以及他们对应的label找出来**
+- **DictInstanceTest.py 用来把所有instanceid以及predicateid插入到dict中，主要为了测试时间，结果在record中**
