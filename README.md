@@ -6,3 +6,4 @@
 - **/MemoryDatabase/ 测试了内存数据库和mysql的在插入数据上的效率对比，本来想做更多，但是内存数据库插入效率不高，郁闷**
 - **/RawDataToSQL/ 将原始的dbpedia数据处理成唯一的整数id**
 - **/CandidatePredicatePath/ 选出每一个RelationPhrase的候选Predicate/Path**
+- **table_schema 数据库中表格的构建模式**
