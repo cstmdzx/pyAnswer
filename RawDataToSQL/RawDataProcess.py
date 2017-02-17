@@ -64,6 +64,7 @@ for eachFileName in fileNames:
 
         listSPO = eachData.split(' ')
         if listSPO.__len__() < 3:
+            print 'shao'
             continue
 
         strSubject = listSPO[0]
@@ -82,7 +83,16 @@ for eachFileName in fileNames:
             intPredicateId = intPredicateCount
             intPredicateCount += 1
 
-        strObject = listSPO[2]
+        del listSPO[0]
+        del listSPO[0]
+
+        strObject = listSPO[0]
+        del listSPO[0]
+
+        for eachWord in listSPO:
+            strObject += ' ' + eachWord
+        # print strObject
+
         if strObject in dictInstance:
             intObjectId = dictInstance[strObject]
         else:

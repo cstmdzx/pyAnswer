@@ -4,14 +4,19 @@ import MySQLdb
 import pdb
 import time # 测试时间
 
-conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
-cur = conn.cursor()
+from ../MySQLConn import mysql_conn
+
+# conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
+# cur = conn.cursor()
+cur = mysql_conn()
 
 # 从PredicateId中根据Pred获得Id
 def get_pred_id_by_url(url):
     str_sql_cmd = 'select Id from PredicateId WHERE Pred = \'' + url.__str__() + '\''
     cur.execute(str_sql_cmd)
     list_pred_id = cur.fetchall()
+
+    #-1 表示没有，-2表示不止一个，不然就返回第一个，每个是个tuple，因此选tuple的第一个
     if list_pred_id.__len__() == 0:
         return -1
     elif list_pred_id.__len__() > 1:
@@ -27,6 +32,8 @@ def get_ins_id_by_url(url):
     str_sql_cmd = 'select Id from InstanceId WHERE Ins = \'' + url.__str__() + '\''
     cur.execute(str_sql_cmd)
     list_ins_id = cur.fetchall()
+
+    #-1 表示没有，-2表示不止一个，不然就返回第一个，每个是个tuple，因此选tuple的第一个
     if list_ins_id.__len__() == 0:
         return -1
     elif list_ins_id.__len__() > 1:
@@ -42,17 +49,15 @@ if __name__ == '__main__':
     start = time.clock()
     intPredId = get_pred_id_by_url(strPredUrl)
     end = time.clock()
-    print end - start # shuchu yunxing shijian
+    print end - start # 输出运行时间
     print intPredId
     print type(intPredId) # 显示类型
 
-'''
-    strInsUrl = ''
+    strInsUrl = '"Strafgesetzbuch"@en'
     start = time.clock()
     intInsId = get_ins_id_by_url(strInsUrl)
     end = time.clock()
-    print end - start # shuchu yunxing shijian
+    print end - start # 输出运行时间
     print intInsId
     print type(intInsId) # 显示类型
-'''
 
