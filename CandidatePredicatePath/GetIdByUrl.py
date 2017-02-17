@@ -4,7 +4,9 @@ import MySQLdb
 import pdb
 import time # 测试时间
 
-from ../MySQLConn import mysql_conn
+import sys
+sys.path.append('..')
+from MySQLConn import mysql_conn
 
 # conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
 # cur = conn.cursor()
@@ -14,15 +16,15 @@ cur = mysql_conn()
 def get_pred_id_by_url(url):
     str_sql_cmd = 'select Id from PredicateId WHERE Pred = \'' + url.__str__() + '\''
     cur.execute(str_sql_cmd)
-    list_pred_id = cur.fetchall()
+    tuple_pred_id = cur.fetchall()
 
     #-1 表示没有，-2表示不止一个，不然就返回第一个，每个是个tuple，因此选tuple的第一个
-    if list_pred_id.__len__() == 0:
+    if tuple_pred_id.__len__() == 0:
         return -1
-    elif list_pred_id.__len__() > 1:
+    elif tuple_pred_id.__len__() > 1:
         return -2
-    elif list_pred_id.__len__() == 1:
-        return list_pred_id[0][0]
+    elif tuple_pred_id.__len__() == 1:
+        return tuple_pred_id[0][0]
     else:
         print 'unexcepted error in get_pred_id_by_url'
 
@@ -31,15 +33,15 @@ def get_ins_id_by_url(url):
     # ins的不一定是url，也可能是纯文本
     str_sql_cmd = 'select Id from InstanceId WHERE Ins = \'' + url.__str__() + '\''
     cur.execute(str_sql_cmd)
-    list_ins_id = cur.fetchall()
+    tuple_ins_id = cur.fetchall()
 
     #-1 表示没有，-2表示不止一个，不然就返回第一个，每个是个tuple，因此选tuple的第一个
-    if list_ins_id.__len__() == 0:
+    if tuple_ins_id.__len__() == 0:
         return -1
-    elif list_ins_id.__len__() > 1:
+    elif tuple_ins_id.__len__() > 1:
         return -2
-    elif list_ins_id.__len__() == 1:
-        return list_ins_id[0][0]
+    elif tuple_ins_id.__len__() == 1:
+        return tuple_ins_id[0][0]
     else:
         print 'unexcepted error in get_ins_id_by_url'
 

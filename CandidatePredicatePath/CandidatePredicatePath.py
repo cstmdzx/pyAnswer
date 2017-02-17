@@ -10,8 +10,14 @@ import MySQLdb
 from GetIdByUrl import get_pred_id_by_url
 from GetIdByUrl import get_ins_id_by_url
 
-conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
-cur = conn.cursor()
+import sys
+sys.path.append('..')
+from MySQLConn import mysql_conn
+
+# conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
+# cur = conn.cursor()
+
+cur = mysql_conn
 
 if __name__ == '__main__':
     fileWikiIns = open('../patty-dataset-freebase/wikipedia-instances.txt')
