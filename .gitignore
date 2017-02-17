@@ -8,3 +8,4 @@ O_SP
 InstanceId
 PredicateId
 patty-dataset-freebase/*
+CandidatePredicatePath/test.py
