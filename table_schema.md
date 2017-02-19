@@ -18,6 +18,12 @@ create index indexId on InstanceId(Id);
         
 + desc InstanceId:
 
++ load date:
+
+```
+LOAD DATA LOCAL INFILE '/home/nklyp/pyAnswer/RawDataToSQL/InstanceId' into table InstanceId fields terminated by '\t';
+```
+
 
 ### **PredicateId**
 + 创建表：
@@ -69,6 +75,11 @@ create index indexObjPred on S_OP(ObjPred);
  Sub     | int(11)      | NO   | MUL | NULL    |       
  ObjPred | varchar(255) | YES  | MUL | NULL    |       
  
++ load data:
+
+```
+LOAD DATA LOCAL INFILE '/home/nklyp/pyAnswer/RawDataToSQL/res/S_OP' into table S_OP fields terminated by '\t';
+```
 
 ### **O_SP**
 + 创建表：
@@ -94,6 +105,11 @@ create index indexSubPred on O_SP(SubPred);
  Obj     | int(11)      | NO   | MUL | NULL    |       
  SubPred | varchar(255) | NO   | MUL | NULL    |        
 
++ load data:
+
+```
+LOAD DATA LOCAL INFILE '/home/nklyp/pyAnswer/RawDataToSQL/res/O_SP' into table O_SP fields terminated by '\t';
+```
 
 ### **P_SO**
 + 创建表：
@@ -119,3 +135,9 @@ create index indexSubObj on P_SO(SubObj);
  Pred   | int(11)      | NO   | MUL | NULL    |       
  SubObj | varchar(255) | NO   | MUL | NULL    |       
  
++ load data:
+
+```
+LOAD DATA LOCAL INFILE '/home/nklyp/pyAnswer/RawDataToSQL/res/P_SO' into table P_SO fields terminated by '\t';
+```
+
