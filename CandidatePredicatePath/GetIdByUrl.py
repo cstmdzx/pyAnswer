@@ -32,7 +32,7 @@ def get_pred_id_by_url(url):
 def get_ins_id_by_url(url):
     # ins的不一定是url，也可能是纯文本
     str_sql_cmd = 'select Id from InstanceId WHERE Ins = \'' + url.__str__() + '\''
-    print str_sql_cmd
+    # print str_sql_cmd
     cur.execute(str_sql_cmd)
     tuple_ins_id = cur.fetchall()
 
