@@ -45,9 +45,14 @@ if __name__ == '__main__':
 
     fileRecord = open('record', 'a')
 
+    intFlag = 0
+
     start = time.clock()
 
     for eachWikiIns in linesWikiIns:
+        intFlag += 1
+        if intFlag % 10000 == 0:
+            print intFlag
         eachWikiIns = eachWikiIns.replace('\n', '')
         words = eachWikiIns.split('\t')
         if words.__len__() < 3:

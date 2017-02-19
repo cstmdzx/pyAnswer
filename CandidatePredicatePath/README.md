@@ -6,3 +6,4 @@
 - **CandidatePredicatePath.py 生成关系词的候选谓语路径**
 - **record 记录DictInstanceTest.py的测试时间结果,以及len1的时间**
 - **CandidatePredicatePathForRep.py和CandidatePredicatePathForRep2.py是之前写的，目前主要有用的还是CandidatePredicatePath.py**
+- **/FilePredicatePath/ 里保存的PredicatePath，从CandidatePredicatePath.py里的出来的，里面有len1234，没有上传到github，太大了**
