@@ -13,3 +13,6 @@
 # 处理object，同样的思路, 但是f和b要换以下，因为这次是从Obj出发的
 # 一会回来改一下，分成四个文件来分别求
 # 如果分开跑，Len2和Len3的地方得修改一下，整体一起跑就没事，dictObjLen1现在是在Len2上建的
+# len1只需要SubLen1，len2需要SubLen1和ObjLen1，len3需要SubLen2和ObjLen1，len4需要SubLen2和ObjLen2
+
+# 注意，结尾有可能是个‘.’，删了他

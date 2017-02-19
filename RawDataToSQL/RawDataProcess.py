@@ -1,3 +1,5 @@
+# -*-coding:UTF-8-*-
+
 import MySQLdb
 import os
 import time
@@ -88,9 +90,15 @@ for eachFileName in fileNames:
 
         strObject = listSPO[0]
         del listSPO[0]
+        intLen = listSPO.__len__()
+        # print intLen
+        # print listSPO
 
-        for eachWord in listSPO:
-            strObject += ' ' + eachWord
+        if intLen > 0:
+            if listSPO[intLen - 1] == '.':
+                del listSPO[intLen - 1] # 注意，结尾有可能是个‘.’，删了他
+            for eachWord in listSPO:
+                strObject += ' ' + eachWord
         # print strObject
 
         if strObject in dictInstance:
