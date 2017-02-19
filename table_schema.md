@@ -2,8 +2,10 @@
 ### **InstanceId**
 + 创建表：
 
-    create table InstanceId(Ins binary varchar(255) not null , Id int not null);
+    '
+    create table InstanceId(Ins varchar(255) binary not null , Id int not null);
     --均未使用主键，而是后面直接创建索引，使用主键会降低插入速度,binary代表大小写敏感
+    '
     
 + 创建索引：
 
@@ -20,7 +22,7 @@
 + 创建表：
 
 
-    create table PredicaetId(Pred binary varchar(255) not null , Id int not null);
+    create table PredicateId(Pred varchar(255) binary not null , Id int not null);
     --均未使用主键，而是后面直接创建索引，使用主键会降低插入速度,binary代表大小写敏感
     --然而这个我还是在Id上创建了primary key，不过这个表小，影响不大，至少目前影响不大
     
