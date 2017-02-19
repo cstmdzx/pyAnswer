@@ -32,6 +32,8 @@ pydb.create_index('Url')
 intEndTime = time.time()
 print 'create index time:' + str(intEndTime - intStartTime)
 
+pau = raw_input('sui bian shuru :')
+
 print sys.getsizeof(pydb)
 
 
