@@ -10,3 +10,5 @@ PredicateId
 patty-dataset-freebase/*
 CandidatePredicatePath/test.py
 *.pyc
+FileCandidatePredicatePath
+FilePredicatePath/*
