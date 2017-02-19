@@ -4,4 +4,4 @@
 - **GetValueByIndex.py 包含从S_OP中根据OP选S和根据S选OP的，以及其他几张表(P_SO,O_SP)，同类的函数**
 - **__init__.py 为了别的文件能够import这个文件夹里的.py**
 - **CandidatePredicatePath.py 生成关系词的候选谓语路径**
-- **record 记录DictInstanceTest.py的测试时间结果**
+- **record 记录DictInstanceTest.py的测试时间结果,以及len1的时间**

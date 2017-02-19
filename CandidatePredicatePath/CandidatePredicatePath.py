@@ -8,6 +8,7 @@
 # 如果分开跑，Len2和Len3的地方得修改一下，整体一起跑就没事，dictObjLen1现在是在Len2上建的
 
 import MySQLdb
+import time
 
 from GetIdByUrl import get_pred_id_by_url
 from GetIdByUrl import get_ins_id_by_url
@@ -36,10 +37,15 @@ if __name__ == '__main__':
     intPredLabelId = get_pred_id_by_url(strUrlLabel)
 
     fileRes = open('FileCandidatePredicatePath', 'w')
+    strResPath = './FilePredicatePath/'
     filePredPathLen1 = open(strResPath + 'Len1', 'w')
     filePredPathLen2 = open(strResPath + 'Len2', 'w')
     filePredPathLen3 = open(strResPath + 'Len3', 'w')
-    filePredPathLen4 = open(strResPaht + 'Len4', 'w')
+    filePredPathLen4 = open(strResPath + 'Len4', 'w')
+
+    fileRecord = open('record', 'a')
+
+    start = time.clock()
 
     for eachWikiIns in linesWikiIns:
         eachWikiIns = eachWikiIns.replace('\n', '')
@@ -56,10 +62,15 @@ if __name__ == '__main__':
 
         strRepSub = words[1]
         strRepSub = strRepSub.replace('\"', '\\"')
+        strRepSub = strRepSub.replace('\'', '\\\'')
         strRepObj = words[2]
         strRepObj = strRepObj.replace('\"', '\\"')
+        strRepObj = strRepObj.replace('\'', '\\\'')
         intRepSubId = get_ins_id_by_url('\"' + strRepSub + '\"@en')
-        intRepObjId = get_obj_id_by_url('\"' + strRepObj + '\"@en')
+        intRepObjId = get_ins_id_by_url('\"' + strRepObj + '\"@en')
+
+        # len1只需要SubLen1，len2需要SubLen1和ObjLen1，
+        # len3需要SubLen2和ObjLen1，len4需要SubLen2和ObjLen2
 
         # 处理subject，筛出两层路径
         # 周围第一圈，步长为1的所有谓语和ins
@@ -71,6 +82,7 @@ if __name__ == '__main__':
             listTemp[i] += '[b]'
         listSubTargetLen1.extend(listTemp)
 
+        '''
         # 周围第二圈
         listSubTargetLen2 = list()
         for eachSubTarget in listSubTargetLen1:
@@ -143,8 +155,8 @@ if __name__ == '__main__':
                 intIndexDelete = listDelete[i]
                 del listObjTargetLen2[i]
 
+        '''
         # 一会回来改一下，分成四个文件来分别求
-        strResPath = './FilePredicatePath/'
         # len 1
         for eachTarget in listSubTargetLen1:
             words = eachTarget.split('|')
@@ -159,6 +171,7 @@ if __name__ == '__main__':
             if words[0] == str(intRepObjId):
                 filePredPathLen2.write('~' + words[1])
         filePredPathLen2.write('\n')
+        '''
         '''
         dictObjLen1 = dict()
         for eachTarget in listObjTargetLen1:
@@ -180,6 +193,7 @@ if __name__ == '__main__':
                 for eachPredPath in words2:
                     filePredPathLen2.write('~' + strPred + eachPredPath)
         filePredPathLen2.write('\n')
+        '''
 
         # len 3
         '''
@@ -194,6 +208,7 @@ if __name__ == '__main__':
                 dictObjLen1[strObj] += '~' + strPred
         '''
 
+        '''
         for eachTarget in listSubTargetLen2:
             words = eachTarget.split('|')
             strSub = words[0]
@@ -226,7 +241,11 @@ if __name__ == '__main__':
                     filePredPathLen4.write('~' + strPred + eachPredPath)
         filePredPathLen4.write('\n')
         # fileRes.write('\n')
+        '''
 
+    end = time.clock()
+    print 'Time: %f' % (end-start)
+    fileRecord.write('Time: %f' % (end-start))
     cur.close()
     fileRes.close()
     filePredPathLen1.close()
