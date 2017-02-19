@@ -16,3 +16,4 @@
 # len1只需要SubLen1，len2需要SubLen1和ObjLen1，len3需要SubLen2和ObjLen1，len4需要SubLen2和ObjLen2
 
 # 注意，结尾有可能是个‘.’，删了他
+# 生成每个Path的支持集，集合中的每个元素为一个词对，这个集和可以被表示为一个向量
