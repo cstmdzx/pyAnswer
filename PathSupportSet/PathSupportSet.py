@@ -2,6 +2,8 @@
 
 # 生成每个Path的支持集，集合中的每个元素为一个词对，这个集和可以被表示为一个向量
 
+# CandidatePredicatePathForRep format:RelationPhraseId~Predicate[f/b]Predicate[f/b]...~Predicate[f/b]Predicate[f/b]...­
+
 import MySQLdb
 import re
 
