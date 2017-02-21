@@ -13,3 +13,4 @@ CandidatePredicatePath/test.py
 FileCandidatePredicatePath
 CandidatePredicatePath/FilePredicatePath/*
 SPO
+RawDataToSQL/resSPO/*
