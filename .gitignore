@@ -12,3 +12,4 @@ CandidatePredicatePath/test.py
 *.pyc
 FileCandidatePredicatePath
 CandidatePredicatePath/FilePredicatePath/*
+SPO
