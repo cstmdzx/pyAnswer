@@ -17,3 +17,21 @@
 
 # 注意，结尾有可能是个‘.’，删了他
 # 生成每个Path的支持集，集合中的每个元素为一个词对，这个集和可以被表示为一个向量
+# 保存结果词对
+# 读取之前的结果，这里保存的之前的候选路径
+# 直接生成SPO的三元祖，考虑构建多列索引
+
+# select ObjPred from (select Id from InstanceId where Ins = 'http://dbpedia.org/resource/Category:1989_albums') as a left outer join S_OP on a.Id = S_OP.Sub;
+# select ObjPred from S_OP left outer join InstanceId on S_OP.Sub = InstanceId.Id where Ins = 'http://dbpedia.org/resource/Category:1989_albums'
+# http://dbpedia.org/resource/Category:Softball_players
+# select ObjPred from (select Id from InstanceId where Ins = 'http://dbpedia.org/resource/Category:Softball_players') as a left outer join S_OP on a.Id = S_OP.Sub; time:0.05sec
+# select ObjPred from S_OP left outer join InstanceId on S_OP.Sub = InstanceId.Id where Ins = 'http://dbpedia.org/resource/Category:Softball_players'; time:
+
+# 用来从dbpd_spo中选出非常要命的词对，
+# 同时考虑了每个谓语的方向
+# 这里没有考虑重复的问题，需要搞一个能查重的，重复的就不继续求了
+# 这里没有记录每个path的对应的candidate，调用之前要搞一个
+# 这里需要考虑下一次连接的时候，到底是主语还是宾语作为连接的条件
+# 一共传递三个参数,index: 0.sql语句  1.这里谓语的方向  2.表格的temp名
+# 好像没用了，因为有target和origine
+
