@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     intCount = 0
     for eachSPO in linesSPO:
+        eachSPO = eachSPO.replace('\n', '')
         intCount += 1
         if intCount % 10000000 == 0: # total 250000000
             print time.clock() - start
@@ -28,6 +29,9 @@ if __name__ == '__main__':
         strSub = words[0]
         strPred = words[1]
         strObj = words[2]
+        # print strSub
+        # print strPred
+        # print strObj
         if words.__len__() < 3:
             continue
         # fileS_OP.write(strSub + '\t' + strObj + '\t' + strPred + '\n')
