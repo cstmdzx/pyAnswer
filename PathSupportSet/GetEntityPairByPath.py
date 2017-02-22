@@ -2,7 +2,7 @@
 
 # 用来从dbpd_spo中选出非常要命的词对，
 # 同时考虑了每个谓语的方向
-
+'''
 import MySQLdb
 import pdb
 
@@ -11,30 +11,59 @@ sys.path.append('..')
 from MySQLConn import mysql_conn_name
 
 cur = mysql_conn_name('dbpd_spo')
+'''
 
+import sys
+sys.path.append('..')
+from Lib.VirtuosoLib import query_sparql
+from Lib.VirtuosoLib import json_to_list
 
 def get_entity_pair_by_path(str_path):
+    # 根据谓语路径，产生对应的词对
+    # 输入为每个谓语路径，返回结果为对应词对的list
     # 这里没有记录每个path的对应的candidate，调用之前要搞一个
     words_pred_with_dir = str_path.split(']')
     list_sql_cmd = list()
     list_direct = list()
     int_temp_num = 0
 
-
+    # shengcheng sparql
+    str_param_previous = '?x1'
+    str_sparql_prefix = 'select ?x1,'
+    str_sparql_cmd = 'where { '
     for each_pred_with_dir in words_pred_with_dir:
         int_temp_num += 1
-        if each_pred_with_dir == '':
+        if each_pred_with_dir == '': # zui hou yi ge ke neng shi kong de
             continue
         words = each_pred_with_dir.split('[')
         str_pred = words[0]
         str_direct = words[1]
-        print str_pred
-        print str_direct
+        # print str_pred
+        # print str_direct
+        if str_direct == 'f':
+            str_sparql_cmd += str_param_previous + ' ' + str_pred + ' ' + '?x' + str(int_temp_num) + '. '
+        else:
+            str_sparql_cmd += '?x' + str(int_temp_num) + ' ' + str_pred + ' ' + str_param_previous + '. '
+        str_param_previous = '?x' + str(int_temp_num)
+    str_sparql_final = str_sparql_prefix + str_param_previous + ' ' + str_sparql_cmd + '}'
+
+    # exec
+    # 两个待开发的函数，
+    json_query_res = query_sparql(str_sparql_final) # sparql 查询, 返回的是json结果
+    list_res = json_to_list(json_query_res) # json结果转换为list
+    return list_res
+
+    # print str_sparql_final
+
+'''
         str_sql_cmd = '(select Sub,Obj from SPO where Pred = ' + str_pred + ') as temp' + str(int_temp_num)
+
         list_sql_cmd.append([str_sql_cmd, str_direct, 'temp' + str(int_temp_num)])
         # 一共传递三个参数,index:  0.sql语句  1.这里谓语的方向  2.表格的temp名
+'''
 
 
+'''
     # pdb.set_trace()
     # 这里需要考虑下一次连接的时候，到底是主语还是宾语作为连接的条件
     list_previous = list_sql_cmd[0]
@@ -85,58 +114,11 @@ def get_entity_pair_by_path(str_path):
     print str_sql_cmd_res
 
     #if str_direct == 'f':
+'''
+
 
 if __name__ == '__main__':
 
     get_entity_pair_by_path('pred1[f]pred2[b]pred3[f]pred4[b]')
-'''
-(select temp7.Obj,temp4.Subfrom
-        (
-            (select temp6.Obj,temp3.Objfrom
-                (
-                    (select temp1.Obj,temp2.Subfrom
-                        (
-                            (select Sub,Obj from SPO where Pred = pred1) as temp1left outer join
-                            (select Sub,Obj from SPO where Pred = pred2) as temp2 on temp1.Sub=temp2.Obj)
-                        ) as temp6left outer join
-                    (select Sub,Obj from SPO where Pred = pred3) as temp3 on temp6.Sub=temp3.Sub)
-                ) as temp7left outer join
-            (select Sub,Obj from SPO where Pred = pred4) as temp4 on temp7.Obj=temp4.Obj
-        )
-        ) as temp8
-
-(select temp7.Sub,temp4.Sub from
-        (
-            (select temp6.Sub,temp3.Obj from
-                (
-                    (select temp1.Sub,temp2.Sub from
-                        (
-                            (select Sub,Obj from SPO where Pred = pred1) as temp1 left outer join
-                            (select Sub,Obj from SPO where Pred = pred2) as temp2 on temp1.Obj=temp2.Obj
-                        )
-                    ) as temp6 left outer join
-                    (select Sub,Obj from SPO where Pred = pred3) as temp3 on temp6.Sub=temp3.Sub
-                )
-            ) as temp7 left outer join
-            (select Sub,Obj from SPO where Pred = pred4) as temp4 on temp7.Obj=temp4.Obj
-        )
-) as temp8
 
 
-'''
-(select temp7.temp6Sub as temp7Sub,temp4.temp3temp6Subas temp4temp6Sub from
-        (
-            (select temp6.temp1Sub as temp6Sub,temp3.temp2temp1Objas temp3temp1Obj from
-                (
-                    (select temp1.Sub as temp1Sub,temp2.Subas temp2Sub from
-                        (
-                            (select Sub,Obj from SPO where Pred = pred1) as temp1 left outer join
-                            (select Sub,Obj from SPO where Pred = pred2) as temp2 on temp1.Obj=temp2.Obj
-                        )
-                    ) as temp6 left outer join
-                    (select Sub,Obj from SPO where Pred = pred3) as temp3 on temp6.temp1Sub=temp3.temp2temp1Sub
-                )
-            ) as temp7 left outer join
-            (select Sub,Obj from SPO where Pred = pred4) as temp4 on temp7.temp6temp1Obj=temp4.temp3temp6Obj
-        )
-) as temp8
