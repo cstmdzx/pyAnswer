@@ -14,3 +14,4 @@ FileCandidatePredicatePath
 CandidatePredicatePath/FilePredicatePath/*
 SPO
 RawDataToSQL/resSPO/*
+test_dbpedia/*
