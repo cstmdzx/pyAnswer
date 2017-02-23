@@ -1,6 +1,6 @@
 # -*-coding:UTF-8-*-
 
-# 用来生成每个词对的tf-idf，用于计算相似度
+# 用来生成每个词对的idf，用于计算相似度
 
 import math
 
@@ -37,14 +37,24 @@ if __name__ == '__main__':
 
     fileRepSupSet = open('FileRepSupSet', 'r')
     dictRepIdf = get_idf_by_file(fileRepSupSet)
+    fileDictRepIdf = open('FileDictRepIdf', 'w')
+    for eachKey in dictRepIdf:
+        fileDictRepIdf.write(eachKey + ('\t%f' %f dictRepIdf[eachKey]) + '\n')
+    '''
+    # a print test
     intFlag = 0
     for eachKey in dictRepIdf:
         print ('%s : %f') % (eachKey, dictRepIdf[eachKey])
         intFlag += 1
         if intFlag % 10 == 0: break
+    '''
 
-'''
+    # FilePredSupSet unfinish
     filePredSupSet = open('FilePredSupSet', 'r')
     dictPredIdf = get_idf_by_file(filePredSupSet)
-'''
+    fileDictPredIdf = open('FileDictPredIdf', 'w')
+    for eachKey in dictPredIdf:
+        fileDictPredIdf.write(eachKey + ('\t%f' %f dictPredIdf[eachKey]) + '\n')
+
+
 
