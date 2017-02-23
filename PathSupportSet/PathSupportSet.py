@@ -17,7 +17,7 @@ cur = mysql_conn()
 '''
 
 if __name__ == '__main__':
-    filePredPathSupSet = open('PredicatePathSupSet', 'w') # 保存结果词对
+    filePredPathSupSet = open('FilePredPathSupSet', 'w') # 保存结果词对
     filePredPath = open('FilePredicatePath', 'r') # 读取之前的结果, 这里保存的之前的候选路径
     filePredPathAssociateRep = open('FilePredPathAssociateRep', 'w') #
 
