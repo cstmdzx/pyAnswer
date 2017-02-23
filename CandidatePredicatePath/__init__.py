@@ -50,3 +50,14 @@
 # 输入为文件句柄，输出为一个计算完成的词典
 
 # 记录文档频率
+# 计算余弦相似度
+# 输入为rep和pred词对idf的dict，以及两个的对应的向量字符串，format:pair1~pair2~...
+# 这里应该是没有包含Rep的id以及Pred的表达式
+# 计算长度
+# 计算内积
+
+# 专门用来处理FileDictIdf的，别的可能还得再写一个
+# 输入为dict_idf的文件句柄，输出为转化之后的dict
+
+# 继续去处理，应该需要读取一个是包含PredPathAssociateRepId的那个文件，还有两个是分别的SupSet
+# 根据两个的SupSet,计算可能的candidate之间的相似度，就行了
