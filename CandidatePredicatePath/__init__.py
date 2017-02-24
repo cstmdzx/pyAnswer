@@ -61,3 +61,6 @@
 
 # 继续去处理，应该需要读取一个是包含PredPathAssociateRepId的那个文件，还有两个是分别的SupSet
 # 根据两个的SupSet,计算可能的candidate之间的相似度，就行了
+
+# 根据文件生成支持集词典
+# 输入为文件句柄，输出为向量dict，dict[id] = list[pair1, pair2, ...]
