@@ -84,7 +84,7 @@ if __name__ == '__main__':
     filePredPathAssocitedRep = open('../PathSupportSet/FilePredPathAssociateRep', 'r')
     linesPredPathAssocitedRep = filePredPathAssocitedRep.readlines()
 
-    fileParaphraseDictionaryRepId = open('FileParaPhraseDictionaryRepId', 'w') # format:strPredPath\t RepId\tfloatSimilarity\n
+    fileParaphraseDictionaryRepId = open('FileParaphraseDictionaryRepId', 'w') # format:strPredPath\t RepId\tfloatSimilarity\n
     for eachPredPathAssocitedRep in linesPredPathAssocitedRep:
         eachPredPathAssocitedRep = eachPredPathAssocitedRep.replace('\n', '')
         words = eachPredPathAssocitedRep.split(~)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         listRepId = words
         for eachRepId in listRepId:
             floatSimilarity = cos_similarity(dictRepIdf, dictPredIdf, dictRepSupSet[eachRepId], dictPredPathSupSet[strPredPath])
-            fileParaphraseDictionaryRepId.write(strPredPath + '\t' + eachRepId + '\t%f' % floatSimilarity + '\n')
+            fileParaphraseDictionaryRepId.write(eachRepId + '\t' + strPredPath + '\t%f' % floatSimilarity + '\n')
 
     fileDictRepIdf.close()
     fileDictPredIdf.close()
