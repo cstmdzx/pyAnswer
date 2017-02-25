@@ -16,3 +16,4 @@ SPO
 RawDataToSQL/resSPO/*
 test_dbpedia/*
 CosSimilarity/FileRepSupSet
+InvertedIndex/FileInvertedIndex.txt
