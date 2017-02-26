@@ -71,6 +71,7 @@ if __name__ == '__main__':
             dictPathCorRepId[strPathIndex] = setRep
 
         # 用来把这个玩意的neibor都选出来，
+        # 还没想好怎么判断主语宾语
         for eachRepPath in listRepByDFS:
             listPath = eachRepPath[0]
             for eachWord in listPath:
