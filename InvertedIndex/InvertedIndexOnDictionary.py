@@ -1,7 +1,7 @@
 # coding=gbk
-filePatterns = open('wikipedia-patterns.txt')  # <RelationPhraseId~predicate1[f/b]predicate2[f/b]predicate3[f/b],probability~……>
+filePatterns = open('../patty-dataset-freebase/wikipedia-patterns.txt')  # <RelationPhraseId~predicate1[f/b]predicate2[f/b]predicate3[f/b],probability~……>
 # filePatterns = open('test.txt')
-fileInvertedIndex = open('InvertedIndex.txt', 'w')
+fileInvertedIndex = open('FileInvertedIndex.txt', 'w')
 linesDictionary = filePatterns.readlines()
 del linesDictionary[0]
 
