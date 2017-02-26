@@ -73,7 +73,10 @@ if __name__ == '__main__':
         for eachRepPath in listRepByDFS:
             listPath = eachRepPath[0]
             for eachWord in listPath:
-                listNeighbors
+                listNeighbors = graphDepTree[eachWord].nodes()
+                for eachNeighbor in listNeighbors:
+                    if eachNeighbor not in listPath:
+
 
 
 
