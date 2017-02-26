@@ -70,6 +70,7 @@ if __name__ == '__main__':
                 strPathIndex += eachWord
             dictPathCorRepId[strPathIndex] = setRep
 
+        # 用来把这个玩意的neibor都选出来，
         for eachRepPath in listRepByDFS:
             listPath = eachRepPath[0]
             for eachWord in listPath:
