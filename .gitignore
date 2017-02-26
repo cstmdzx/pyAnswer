@@ -17,3 +17,5 @@ RawDataToSQL/resSPO/*
 test_dbpedia/*
 CosSimilarity/FileRepSupSet
 InvertedIndex/FileInvertedIndex.txt
+QueryGraph/FileDependencyTree
+QueryGraph/FileQuestion
