@@ -1,1 +1,1 @@
-Time: 30.626062
+in virtuoso.ini file, setNumberOfBuffers          = 8160000MaxDirtyBuffers          = 6000000and this can help to speed up query in some degree==========================Time: 30.626062
