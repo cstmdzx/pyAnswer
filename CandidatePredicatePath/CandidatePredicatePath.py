@@ -10,49 +10,53 @@
 import MySQLdb
 import time
 
-from GetIdByUrl import get_pred_id_by_url
-from GetIdByUrl import get_ins_id_by_url
+#from GetIdByUrl import get_pred_id_by_url
+#from GetIdByUrl import get_ins_id_by_url
 
 import sys
 sys.path.append('..')
-from MySQLConn import mysql_conn
+#from MySQLConn import mysql_conn
 
-from GetValueByIndex import get_S_by_OP
-from GetValueByIndex import get_O_by_SP
-from GetValueByIndex import get_P_by_SO
-from GetValueByIndex import get_SP_by_O
-from GetValueByIndex import get_SO_by_P
-from GetValueByIndex import get_OP_by_S
+#from GetValueByIndex import get_S_by_OP
+#from GetValueByIndex import get_O_by_SP
+#from GetValueByIndex import get_P_by_SO
+#from GetValueByIndex import get_SP_by_O
+#from GetValueByIndex import get_SO_by_P
+#from GetValueByIndex import get_OP_by_S
 
 # conn = MySQLdb.connect(host='localhost', user='root', passwd='Dbis_23508468', db='dbpd_useid')
 # cur = conn.cursor()
 
-cur = mysql_conn()
+#cur = mysql_conn()
+from Lib.FuncVirtuosoConn import get_query_results
+from FuncGetSparqlByLen import get_sparql_by_len
 
 if __name__ == '__main__':
     fileWikiIns = open('../patty-dataset-freebase/wikipedia-instances.txt')
     linesWikiIns = fileWikiIns.readlines()
+    print 'Read Wiki Ins Finish'
 
-    strUrlLabel = 'http://www.w3.org/2000/01/rdf-schema#label'
-    intPredLabelId = get_pred_id_by_url(strUrlLabel)
+    # strUrlLabel = '<http://www.w3.org/2000/01/rdf-schema#label>'
+    #intPredLabelId = get_pred_id_by_url(strUrlLabel)
 
     fileRes = open('FileCandidatePredicatePath', 'w')
     strResPath = './FilePredicatePath/'
     filePredPathLen1 = open(strResPath + 'Len1', 'w')
-    filePredPathLen2 = open(strResPath + 'Len2', 'w')
-    filePredPathLen3 = open(strResPath + 'Len3', 'w')
-    filePredPathLen4 = open(strResPath + 'Len4', 'w')
+    #filePredPathLen2 = open(strResPath + 'Len2', 'w')
+    #filePredPathLen3 = open(strResPath + 'Len3', 'w')
+    #filePredPathLen4 = open(strResPath + 'Len4', 'w')
 
     fileRecord = open('record', 'a')
 
     intFlag = 0
 
-    start = time.clock()
+    start = time.time()
 
     for eachWikiIns in linesWikiIns:
         intFlag += 1
         if intFlag % 10000 == 0:
             print intFlag
+            print time.time() - start
         eachWikiIns = eachWikiIns.replace('\n', '')
         words = eachWikiIns.split('\t')
         if words.__len__() < 3:
@@ -60,25 +64,28 @@ if __name__ == '__main__':
 
         strRepId = words[0]
         # fileRes.write(strRepId)
-        filePredPathLen1.write(strRepId)
-        filePredPathLen2.write(strRepId)
-        filePredPathLen3.write(strRepId)
-        filePredPathLen4.write(strRepId)
+        # filePredPathLen2.write(strRepId)
+        # filePredPathLen3.write(strRepId)
+        # filePredPathLen4.write(strRepId)
 
         strRepSub = words[1]
         strRepSub = strRepSub.replace('\"', '\\"')
-        strRepSub = strRepSub.replace('\'', '\\\'')
+        #strRepSub = strRepSub.replace('\'', '\\\'')
+        strRepSub = '\"' + strRepSub + '\"@en'
         strRepObj = words[2]
         strRepObj = strRepObj.replace('\"', '\\"')
-        strRepObj = strRepObj.replace('\'', '\\\'')
-        intRepSubId = get_ins_id_by_url('\"' + strRepSub + '\"@en')
-        intRepObjId = get_ins_id_by_url('\"' + strRepObj + '\"@en')
+        #strRepObj = strRepObj.replace('\'', '\\\'')
+        strRepObj = '\"' + strRepObj + '\"@en'
+        # intRepSubId = get_ins_id_by_url('\"' + strRepSub + '\"@en')
+        # intRepObjId = get_ins_id_by_url('\"' + strRepObj + '\"@en')
 
         # len1只需要SubLen1，len2需要SubLen1和ObjLen1，
         # len3需要SubLen2和ObjLen1，len4需要SubLen2和ObjLen2
 
         # 处理subject，筛出两层路径
         # 周围第一圈，步长为1的所有谓语和ins
+        '''
+        # change to virtuoso,
         listSubTargetLen1 = get_OP_by_S(intRepSubId) # forward
         for i in range(0, listSubTargetLen1.__len__()):
             listSubTargetLen1[i] += '[f]'
@@ -86,6 +93,7 @@ if __name__ == '__main__':
         for i in range(0, listTemp.__len__()):
             listTemp[i] += '[b]'
         listSubTargetLen1.extend(listTemp)
+        '''
 
         '''
         # 周围第二圈
@@ -163,13 +171,47 @@ if __name__ == '__main__':
         '''
         # 一会回来改一下，分成四个文件来分别求
         # len 1
+        listSparqlLen1 = get_sparql_by_len(strRepSub, strRepObj, 1)
+        for eachItem in listSparqlLen1:
+            strSparqlCmd, tupleDir = eachItem
+            try:
+                listPathLen1 = get_query_results(strSparqlCmd)
+            except KeyboardInterrupt:
+                sys.exit(0)
+            except Exception as e:
+                print strSparqlCmd
+            if listPathLen1.__len__() == 0:
+                continue
+            filePredPathLen1.write(strRepId)
+            for eachDictItem in listPathLen1:
+                # print eachDictItem['p1'] + tupleDir[0]
+                filePredPathLen1.write('~' + eachDictItem['p1'] + tupleDir[0])
+            filePredPathLen1.write('\n')
+
+        '''
         for eachTarget in listSubTargetLen1:
             words = eachTarget.split('|')
             if words[0] == str(intRepObjId):
                 filePredPathLen1.write('~' + words[1])
         filePredPathLen1.write('\n')
+        '''
 
         # len 2 , zhu yao jiushi zhege
+        '''
+        listSparqlLen2 = get_sparql_by_len(strRepSub, strRepObj, 2)
+        for eachItem in listSparqlLen2:
+            strSparqlCmd, tupleDir = eachItem
+            listPathLen2 = get_query_results(strSparqlCmd)
+            if listPathLen2.__len__() == 0:
+                continue
+            filePredPathLen2.write(strRepId)
+            for eachDictItem in listPathLen1:
+                filePredPathLen2.write('~' + eachDictItem['p1'] + tupleDir[0])
+                filePredPathLen2.write('~' + eachDictItem['p2'] + tupleDir[1])
+            filePredPathLen2.write('\n')
+        '''
+
+
         '''
         for eachTarget in listSubTargetLen2:
             words = eachTarget.split('|')
@@ -202,6 +244,21 @@ if __name__ == '__main__':
 
         # len 3
         '''
+        listSparqlLen3 = get_sparql_by_len(strRepSub, strRepObj, 3)
+        for eachItem in listSparqlLen3:
+            strSparqlCmd, tupleDir = eachItem
+            listPathLen3 = get_query_results(strSparqlCmd)
+            if listPathLen3.__len__() == 0:
+                continue
+            filePredPathLen3.write(strRepId)
+            for eachDictItem in listPathLen1:
+                filePredPathLen3.write('~' + eachDictItem['p1'] + tupleDir[0])
+                filePredPathLen3.write('~' + eachDictItem['p2'] + tupleDir[1])
+                filePredPathLen3.write('~' + eachDictItem['p3'] + tupleDir[2])
+            filePredPathLen3.write('\n')
+        '''
+
+        '''
         dictObjLen1 = dict()
         for eachTarget in listObjTargetLen1:
             words = eachTarget.split('|')
@@ -224,8 +281,38 @@ if __name__ == '__main__':
                 for eachPredPath in words2:
                     filePredPathLen3.write('~' + strPred + eachPredPath)
         filePredPathLen3.write('\n')
+        '''
 
         # len 4
+        '''
+        listSparqlLen4 = get_sparql_by_len(strRepSub, strRepObj, 4)
+        for eachItem in listSparqlLen4:
+            strSparqlCmd, tupleDir = eachItem
+            listPathLen4 = get_query_results(strSparqlCmd)
+            if listPathLen4.__len__() == 0:
+                continue
+            filePredPathLen4.write(strRepId)
+            for eachDictItem in listPathLen1:
+                filePredPathLen4.write('~' + eachDictItem['p1'] + tupleDir[0])
+                filePredPathLen4.write('~' + eachDictItem['p2'] + tupleDir[1])
+                filePredPathLen4.write('~' + eachDictItem['p3'] + tupleDir[2])
+                filePredPathLen4.write('~' + eachDictItem['p4'] + tupleDir[3]
+            filePredPathLen4.write('\n')
+        '''
+
+        '''
+        listSparqlLen3 = get_sparql_by_len(strRepSub, strRepObj, 3)
+        for eachItem in listSparqlLen3:
+            strSparqlCmd, tupleDir = eachItem
+            listPathLen3 = get_query_results(strSparqlCmd)
+            if listPathLen3.__len__() == 0:
+                continue
+            filePredPathLen3.write(strRepId)
+            for eachDictItem in listPathLen1:
+                filePredPathLen3.write('~' + eachDictItem['p1'] + tupleDir[0])
+                filePredPathLen3.write('~' + eachDictItem['p2'] + tupleDir[1])
+                filePredPathLen3.write('~' + eachDictItem['p3'] + tupleDir[2])
+
         dictObjLen2 = dict()
         for eachTarget in listObjTargetLen2:
             words = eachTarget.split('|')
@@ -248,14 +335,14 @@ if __name__ == '__main__':
         # fileRes.write('\n')
         '''
 
-    end = time.clock()
+    end = time.time()
     print 'Time: %f' % (end-start)
     fileRecord.write('Time: %f' % (end-start))
-    cur.close()
+    #cur.close()
     fileRes.close()
     filePredPathLen1.close()
-    filePredPathLen2.close()
-    filePredPathLen3.close()
-    filePredPathLen4.close()
+    #filePredPathLen2.close()
+    #filePredPathLen3.close()
+    #filePredPathLen4.close()
     fileWikiIns.close()
 
