@@ -19,3 +19,6 @@ CosSimilarity/FileRepSupSet
 InvertedIndex/FileInvertedIndex.txt
 QueryGraph/FileDependencyTree
 QueryGraph/FileQuestion
+Lib/FileTestSparql
+SpeedUp/FilePredicatePath/*
+SpeedUp/Wiki-Ins-Mini.txt
