@@ -3,6 +3,7 @@
 # 在这里写很多virtuoso的函数
 
 import re
+from FuncVirtuosoConn.py
 
 def query_sparql(str_sparql_cmd):
     # 执行sparql查询，
