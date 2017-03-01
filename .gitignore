@@ -22,3 +22,9 @@ QueryGraph/FileQuestion
 Lib/FileTestSparql
 SpeedUp/FilePredicatePath/*
 SpeedUp/Wiki-Ins-Mini.txt
+PathSupportSet/AssociateRes/*
+PathSupportSet/PathRes/*
+PattyFilteOut/wikipedia-instances-filt
+PattyFilteOut/wikipedia-instances-filt100<<150
+PattyFilteOut/wikipedia-instances-filt<5
+patty-dataset/*
