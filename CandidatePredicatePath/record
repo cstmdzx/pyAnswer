@@ -5,3 +5,38 @@ dict instance time:
 181.49
 dict predicate time:
 185.19
+Time: 29758.790252
+
+
+Len1
+=====================
+input: ../patty-dataset/wikipedia-instances.txt
+output: ../CandidatePredicatePath/FilePredicatePath/Len1  ../CandidatePredicatePath/FilePredicatePath/Len1_2nd
+time: 22606.243355 + 29758.790252 = 52391s = 14.5h
+
+error sparql cmd:
+
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "United States Army"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Fort Terry"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Cecil Lowther"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Fellow (computing)"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Qaim Ali Shah"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Chief Minister of Sindh"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Qaim Ali Shah"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Chief Minister of Sindh"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Ken Olisa"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Fellow (computing)"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Hamid Mir"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Islamabad"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "IGN"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "News Corporation"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Glover H. Cary"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Kentucky"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Glover H. Cary"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Kentucky"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Joseph Bodner"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "California"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Leslie Prentice"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "County Championship"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Chris Foggo"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "ICC Intercontinental Cup"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Hugo Gatti"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Ubaldo Fillol"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Tropical Storm Bill (2003)"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Louisiana"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Aloha Tower Marketplace"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Falls of Clyde (ship)"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Aloha Tower Marketplace"@en . ?x1 ?p1 ?x2 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Hawaii Maritime Center"@en . }
+select ?p1 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Dean Dixon"@en . ?x2 ?p1 ?x1 . ?x2 <http://www.w3.org/2000/01/rdf-schema#label> "Carl Maria von Weber"@en . }
+
+
+len2
+=====================
+input: ../PattyFilteOut/wikipedia-instances-filt
+output: ../PattyFilteOut/SpeedUp/FilePredicatePath/Len2  ../PattyFilteOut/SpeedUp/FilePredicatePath/Len2_2nd
+time: 21057.7577 + 
