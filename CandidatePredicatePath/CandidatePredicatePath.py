@@ -32,7 +32,7 @@ from Lib.FuncVirtuosoConn import get_query_results
 from FuncGetSparqlByLen import get_sparql_by_len
 
 if __name__ == '__main__':
-    fileWikiIns = open('../patty-dataset-freebase/wikipedia-instances.txt')
+    fileWikiIns = open('../patty-dataset/wikipedia-instances.txt')
     linesWikiIns = fileWikiIns.readlines()
     print 'Read Wiki Ins Finish'
 
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     fileRes = open('FileCandidatePredicatePath', 'w')
     strResPath = './FilePredicatePath/'
-    filePredPathLen1 = open(strResPath + 'Len1', 'w')
+    filePredPathLen1 = open(strResPath + 'Len1_2nd', 'w')
     #filePredPathLen2 = open(strResPath + 'Len2', 'w')
     #filePredPathLen3 = open(strResPath + 'Len3', 'w')
     #filePredPathLen4 = open(strResPath + 'Len4', 'w')
@@ -54,6 +54,8 @@ if __name__ == '__main__':
 
     for eachWikiIns in linesWikiIns:
         intFlag += 1
+        if intFlag < 1640000: # log, bengkui place last time
+            continue
         if intFlag % 10000 == 0:
             print intFlag
             print time.time() - start
@@ -184,8 +186,17 @@ if __name__ == '__main__':
                 continue
             filePredPathLen1.write(strRepId)
             for eachDictItem in listPathLen1:
+                try:
+                    strWrite = '~' + eachDictItem['p1'] + tupleDir[0]
+                    filePredPathLen1.write(strWrite.encode('utf-8'))
+                except KeyboardInterrupt:
+                    sys.exit(0)
+                except Exception as e:
+                    print e
+                    print '~' + eachDictItem['p1'] + tupleDir[0]
+                    print type('~' + eachDictItem['p1'] + tupleDir[0])
                 # print eachDictItem['p1'] + tupleDir[0]
-                filePredPathLen1.write('~' + eachDictItem['p1'] + tupleDir[0])
+                # filePredPathLen1.write('~' + eachDictItem['p1'] + tupleDir[0])
             filePredPathLen1.write('\n')
 
         '''
