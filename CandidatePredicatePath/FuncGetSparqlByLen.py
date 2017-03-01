@@ -25,6 +25,7 @@ def get_sparql_by_len(str_sub, str_obj, int_len):
 
         str_sparql += '?x' + str(int_flag) + ' <http://www.w3.org/2000/01/rdf-schema#label> ' + str_obj + ' . }'
         str_pred = str_pred[2:]
+        #str_sparql = 'select ' + str_pred + str_sparql
         str_sparql = 'select ' + str_pred + str_sparql
         #print each_tuple_dir
         #print str_sparql
@@ -33,7 +34,17 @@ def get_sparql_by_len(str_sub, str_obj, int_len):
 
 
 if __name__ == '__main__':
-    listSparql = get_sparql_by_len('a', 'b', 3)
+    listSparql = get_sparql_by_len('"Saint Mary Parish, Jamaica"@en', '"Portland Parish"@en', 1)
+    strSparqlCmd, tupleDir = listSparql[0]
+    print tupleDir
+    print strSparqlCmd
+
+    listSparql = get_sparql_by_len('"Saint Mary Parish, Jamaica"@en', '"Portland Parish"@en', 2)
+    strSparqlCmd, tupleDir = listSparql[0]
+    print tupleDir
+    print strSparqlCmd
+
+    listSparql = get_sparql_by_len('"Saint Mary Parish, Jamaica"@en', '"Portland Parish"@en', 3)
     strSparqlCmd, tupleDir = listSparql[0]
     print tupleDir
     print strSparqlCmd
