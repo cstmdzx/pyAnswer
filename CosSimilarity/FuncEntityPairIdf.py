@@ -3,11 +3,12 @@
 # 用来生成每个词对的idf，用于计算相似度
 
 import math
+import sys
 
-def get_idf_by_file(file_raw):
+def get_idf_by_file(lines_raw):
     # 根据文件来生成词对的tf-idf
     # 输入为文件句柄，输出为一个计算完成的词典
-    lines_raw = file_raw.readlines()
+    # lines_raw = file_raw.readlines()
     dict_idf = dict()
     set_doc = set()
 
@@ -29,7 +30,15 @@ def get_idf_by_file(file_raw):
     int_doc_num = set_doc.__len__()
     # --------------calculate idf using log-------------
     for each_key in dict_idf:
-        dict_idf[each_key] = math.log10(int_doc_num / dict_idf[each_key])
+        try:
+            dict_idf[each_key] = math.log10(int_doc_num / dict_idf[each_key])
+        except Exception as e:
+            print e
+            print int_doc_num
+            print dict_idf[each_key]
+            continue
+        except KeyboardInterrupt:
+            sys.exit(0)
 
     return dict_idf
 
@@ -39,7 +48,7 @@ if __name__ == '__main__':
     dictRepIdf = get_idf_by_file(fileRepSupSet)
     fileDictRepIdf = open('FileDictRepIdf', 'w')
     for eachKey in dictRepIdf:
-        fileDictRepIdf.write(eachKey + ('\t%f' %f dictRepIdf[eachKey]) + '\n')
+        fileDictRepIdf.write(eachKey + ('~%f' % dictRepIdf[eachKey]) + '\n')
     '''
     # a print test
     intFlag = 0
@@ -50,11 +59,11 @@ if __name__ == '__main__':
     '''
 
     # FilePredSupSet unfinish
-    filePredSupSet = open('FilePredSupSet', 'r')
+    filePredSupSet = open('../PathSupportSet/PathRes/FilePredPathSupSetLen1', 'r')
     dictPredIdf = get_idf_by_file(filePredSupSet)
     fileDictPredIdf = open('FileDictPredIdf', 'w')
     for eachKey in dictPredIdf:
-        fileDictPredIdf.write(eachKey + ('\t%f' %f dictPredIdf[eachKey]) + '\n')
+        fileDictPredIdf.write(eachKey + ('~%f' % dictPredIdf[eachKey]) + '\n')
 
 
 

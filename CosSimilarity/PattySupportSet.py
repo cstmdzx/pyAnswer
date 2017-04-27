@@ -7,7 +7,7 @@ import time
 
 if __name__ == '__main__':
 
-    filePattyWikiIns = open('../patty-dataset-freebase/wikipedia-instances.txt', 'r')
+    filePattyWikiIns = open('../patty-dataset/wikipedia-instances.txt', 'r')
     linesPattyWikiIns = filePattyWikiIns.readlines()
 
     fileRepSupSet = open('FileRepSupSet', 'w')

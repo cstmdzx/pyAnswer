@@ -15,25 +15,23 @@ sys.path.append('..')
 
 from Lib.FuncVirtuosoConn import get_query_results
 from FuncGetSparqlByLen import get_sparql_by_len
+from FuncGetSparqlByLen import get_sparql_by_len_with_label
 
 if __name__ == '__main__':
-    fileWikiIns = open('../PattyFilteOut/wikipedia-instances-filt<5', 'r')
+    fileWikiIns = open('../PattyFilteOut/wikipedia-instances-filt100<<150', 'r')
     start = time.time()
     linesWikiIns = fileWikiIns.readlines()
     print 'Read Wiki Ins Finish'
     print 'Read Time %f' % (time.time()-start)
 
-    # strUrlLabel = '<http://www.w3.org/2000/01/rdf-schema#label>'
-    #intPredLabelId = get_pred_id_by_url(strUrlLabel)
-
-    fileRes = open('FileCandidatePredicatePathLen2<5', 'w')
+    fileRes = open('FileCandidatePredicatePath', 'w')
     strResPath = './FilePredicatePath/'
     #filePredPathLen1 = open(strResPath + 'Len1', 'w')
-    filePredPathLen2 = open(strResPath + 'Len2<5', 'w')
-    #filePredPathLen3 = open(strResPath + 'Len3', 'w')
+    #filePredPathLen2 = open(strResPath + 'Len2_2nd', 'w')
+    filePredPathLen3 = open(strResPath + 'Len3', 'w')
     #filePredPathLen4 = open(strResPath + 'Len4', 'w')
 
-    fileRecord = open('record<5', 'a')
+    fileRecord = open('record', 'a')
 
     intFlag = 0
 
@@ -48,6 +46,7 @@ if __name__ == '__main__':
 
         #if intFlag < 51300:
         #    continue
+
         #
 
         eachWikiIns = eachWikiIns.replace('\n', '')
@@ -112,18 +111,68 @@ if __name__ == '__main__':
         '''
 
         # len 2 , zhu yao jiushi zhege
-        listSparqlLen2 = get_sparql_by_len(strRepSub, strRepObj, 2)
-        for eachItem in listSparqlLen2:
+        #listSparqlLen2 = get_sparql_by_len(strRepSub, strRepObj, 2)
+        #for eachItem in listSparqlLen2:
+        #    strSparqlCmd, tupleDir = eachItem
+        #    tempStart = time.time()
+        #    intSparqlCmdLen = strSparqlCmd.__len__()
+        #    strSparqlCmd = strSparqlCmd[:intSparqlCmdLen - 2]
+        #    strSparqlCmd += 'FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }'
+        #    # strSparqlCmd = strSparqlCmd.replace('select', 'select distinct')
+
+        #    # print strSparqlCmd
+        #    try:
+        #        listPathLen2 = get_query_results(strSparqlCmd)
+        #    except Exception as e:
+        #        print e
+        #        print strSparqlCmd
+        #        continue
+        #    except KeyboardInterrupt:
+        #        sys.exit(0)
+        #    #print time.time() - tempStart
+        #    '''
+        #    if (time.time()-tempStart) > 0.5:
+        #        print strSparqlCmd
+        #        print listPathLen2
+        #    '''
+        #    # print listPathLen2
+        #    if listPathLen2.__len__() == 0:
+        #        continue
+        #    # print strSparqlCmd
+        #    filePredPathLen2.write(strRepId)
+        #    for eachDictItem in listPathLen2:
+        #        try:
+        #            filePredPathLen2.write(('~' + eachDictItem['p1'] + tupleDir[0]).encode('utf-8'))
+        #            filePredPathLen2.write((eachDictItem['p2'] + tupleDir[1]).encode('utf-8'))
+        #        except KeyboardInterrupt:
+        #            sys.exit(0)
+        #        except Exception as e:
+        #            print e
+        #            print strSparqlCmd
+        #            # print listPathLen2
+        #            print eachDictItem
+        #            print '~' + eachDictItem['p1'] + tupleDir[0]
+        #            print '~' + eachDictItem['p2'] + tupleDir[1]
+        #            print type('~' + eachDictItem['p1'] + tupleDir[0])
+        #            print type('~' + eachDictItem['p2'] + tupleDir[1])
+
+
+        #    filePredPathLen2.write('\n')
+
+
+        # len 3
+        listSparqlLen3 = get_sparql_by_len_with_label(strRepSub, strRepObj, 3)
+        for eachItem in listSparqlLen3:
             strSparqlCmd, tupleDir = eachItem
             tempStart = time.time()
-            intSparqlCmdLen = strSparqlCmd.__len__()
-            strSparqlCmd = strSparqlCmd[:intSparqlCmdLen - 2]
-            strSparqlCmd += 'FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }'
+            #intSparqlCmdLen = strSparqlCmd.__len__()
+            #strSparqlCmd = strSparqlCmd[:intSparqlCmdLen - 2]
+            #strSparqlCmd += 'FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> and ?p2 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }'
             # strSparqlCmd = strSparqlCmd.replace('select', 'select distinct')
 
             # print strSparqlCmd
             try:
-                listPathLen2 = get_query_results(strSparqlCmd)
+                listPathLen3 = get_query_results(strSparqlCmd)
             except Exception as e:
                 print e
                 print strSparqlCmd
@@ -134,34 +183,36 @@ if __name__ == '__main__':
             '''
             if (time.time()-tempStart) > 0.5:
                 print strSparqlCmd
-                print listPathLen2
+                print listPathLen3
             '''
-            # print listPathLen2
-            if listPathLen2.__len__() == 0:
+            # print listPathLen3
+            if listPathLen3.__len__() == 0:
                 continue
             # print strSparqlCmd
-            filePredPathLen2.write(strRepId)
-            for eachDictItem in listPathLen2:
+            filePredPathLen3.write(strRepId)
+            for eachDictItem in listPathLen3:
                 try:
-                    filePredPathLen2.write(('~' + eachDictItem['p1'] + tupleDir[0]).encode('utf-8'))
-                    filePredPathLen2.write((eachDictItem['p2'] + tupleDir[1]).encode('utf-8'))
+                    filePredPathLen3.write(('~' + eachDictItem['p1'] + tupleDir[0]).encode('utf-8'))
+                    filePredPathLen3.write((eachDictItem['p2'] + tupleDir[1]).encode('utf-8'))
+                    filePredPathLen3.write((eachDictItem['p3'] + tupleDir[2]).encode('utf-8'))
                 except KeyboardInterrupt:
                     sys.exit(0)
                 except Exception as e:
                     print e
                     print strSparqlCmd
-                    # print listPathLen2
+                    # print listPathLen3
                     print eachDictItem
                     print '~' + eachDictItem['p1'] + tupleDir[0]
                     print '~' + eachDictItem['p2'] + tupleDir[1]
+                    print '~' + eachDictItem['p3'] + tupleDir[2]
                     print type('~' + eachDictItem['p1'] + tupleDir[0])
                     print type('~' + eachDictItem['p2'] + tupleDir[1])
+                    print type('~' + eachDictItem['p3'] + tupleDir[2])
 
 
-            filePredPathLen2.write('\n')
+            filePredPathLen3.write('\n')
 
 
-        # len 3
         '''
         listSparqlLen3 = get_sparql_by_len(strRepSub, strRepObj, 3)
         for eachItem in listSparqlLen3:
@@ -176,7 +227,6 @@ if __name__ == '__main__':
                 filePredPathLen3.write('~' + eachDictItem['p3'] + tupleDir[2])
             filePredPathLen3.write('\n')
         '''
-
 
         # len 4
         '''
@@ -202,8 +252,8 @@ if __name__ == '__main__':
     #cur.close()
     fileRes.close()
     #filePredPathLen1.close()
-    filePredPathLen2.close()
-    #filePredPathLen3.close()
+    #filePredPathLen2.close()
+    filePredPathLen3.close()
     #filePredPathLen4.close()
     fileWikiIns.close()
 

@@ -17,7 +17,7 @@ from Lib.FuncVirtuosoConn import get_query_results
 from FuncGetSparqlByLen import get_sparql_by_len
 
 if __name__ == '__main__':
-    fileWikiIns = open('../PattyFilteOut/wikipedia-instances-filt<5', 'r')
+    fileWikiIns = open('../PattyFilteOut/wikipedia-instances-filt100<<150', 'r')
     start = time.time()
     linesWikiIns = fileWikiIns.readlines()
     print 'Read Wiki Ins Finish'
@@ -26,14 +26,14 @@ if __name__ == '__main__':
     # strUrlLabel = '<http://www.w3.org/2000/01/rdf-schema#label>'
     #intPredLabelId = get_pred_id_by_url(strUrlLabel)
 
-    fileRes = open('FileCandidatePredicatePathLen2<5', 'w')
+    fileRes = open('FileCandidatePredicatePathLen2100<<150', 'w')
     strResPath = './FilePredicatePath/'
     #filePredPathLen1 = open(strResPath + 'Len1', 'w')
-    filePredPathLen2 = open(strResPath + 'Len2<5', 'w')
+    filePredPathLen2 = open(strResPath + 'Len2100<<150', 'w')
     #filePredPathLen3 = open(strResPath + 'Len3', 'w')
     #filePredPathLen4 = open(strResPath + 'Len4', 'w')
 
-    fileRecord = open('record<5', 'a')
+    fileRecord = open('record100<<150', 'a')
 
     intFlag = 0
 

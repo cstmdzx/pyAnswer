@@ -5,7 +5,6 @@ dict instance time:
 181.49
 dict predicate time:
 185.19
-Time: 29758.790252
 
 
 Len1
@@ -39,4 +38,30 @@ len2
 =====================
 input: ../PattyFilteOut/wikipedia-instances-filt
 output: ../PattyFilteOut/SpeedUp/FilePredicatePath/Len2  ../PattyFilteOut/SpeedUp/FilePredicatePath/Len2_2nd
-time: 21057.7577 + 
+time: 21057.7577 + 167402.021369
+
+error sparql cmd:
+
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Rochester Knighthawks"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Detroit Turbos"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Calgary Roughnecks"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Buffalo Bandits"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Baltimore Thunder"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Edmonton Rush"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+select ?p1, ?p2 where { ?x1 <http://www.w3.org/2000/01/rdf-schema#label> "Steve Dietrich"@en . ?x1 ?p1 ?x2 . ?x3 ?p2 ?x2 . ?x3 <http://www.w3.org/2000/01/rdf-schema#label> "Toronto Rock"@en .FILTER (?p1 != <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }
+
+input: ../PattyFilteOut/wikipedia-instances-filt100<<150
+output: ../PattyFilteOut/SpeedUp/FilePredicatePath/Len2100<<150
+time: 61957.682705
+
+error sparql cmd:
+
+
+len3
+=====================
+input: 
+output: 
+time: 
+
+error sparql cmd:
+

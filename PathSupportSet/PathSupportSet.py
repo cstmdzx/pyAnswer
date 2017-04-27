@@ -23,9 +23,9 @@ if __name__ == '__main__':
     strFileAssociateRes = './AssociateRes/'
 
     start = time.time()
-    filePredPathSupSet = open(strFilePathRes + 'FilePredPathSupSetLen1', 'w') # 保存结果词对
-    filePredPath = open('../CandidatePredicatePath/FilePredicatePath/FileLen1Merged', 'r') # 读取之前的结果, 这里保存的之前的候选路径
-    filePredPathAssociateRep = open(strFileAssociateRes + 'FilePredPathAssociateRepLen1', 'w') #
+    filePredPathSupSet = open(strFilePathRes + 'FilePredPathSupSetLen2100<<150', 'w') # 保存结果词对
+    filePredPath = open('../SpeedUp/FilePredicatePath/Len2100<<150', 'r') # 读取之前的结果, 这里保存的之前的候选路径
+    filePredPathAssociateRep = open(strFileAssociateRes + 'FilePredPathAssociateRepLen2100<<150', 'w') #
 
     linesPredPath = filePredPath.readlines()
     dictPredPathAssociateRep = dict()
@@ -53,7 +53,6 @@ if __name__ == '__main__':
             else:
                 dictPredPathAssociateRep[eachPath] = strRepId
 
-            filePredPathSupSet.write(eachPath)
             try:
                 listEntityPair = get_entity_pair_by_path(eachPath)
             except Exception as e:
@@ -62,6 +61,7 @@ if __name__ == '__main__':
                 continue
             except KeyboardInterrupt:
                 sys.exit(0)
+            filePredPathSupSet.write(eachPath)
             for eachEntityPair in listEntityPair:
                 filePredPathSupSet.write(('~' + eachEntityPair['sl'] + '\t' + eachEntityPair['ol']).encode('UTF-8'))
             filePredPathSupSet.write('\n')
